@@ -10,26 +10,26 @@ class MyHandler(FileSystemEventHandler):
 
     # This method gets called when a file in the watched folder is modified.
     def on_modified(self, event):
-        # Loop through all files in the tracked folder.
         for filename in os.listdir(folder_to_track):
-            # Separate file name and file extension
+            # Here we are separating file names from their extension
             file, file_extension = os.path.splitext(filename)
-            # If there is a file extension (this ignores directories).
-            if file_extension:
-                # Define a new folder for each file type based on its extension.
+            # Checking if it's a file or a folder
+            if file_extension:  # This will be True only for files, because folders don't have extensions
+                # Create a new folder path for each file type, and make it upper case
                 new_folder = os.path.join(folder_destination, file_extension.replace('.', '').upper())
-                # Define the source path.
+                # Define the source path
                 src = os.path.join(folder_to_track, filename)
-                # Define the destination path.
+                # Define the new destination path
                 new_destination = os.path.join(new_folder, filename)
-                # If the folder doesn't exist, create it.
+                # Check if the new folder exists, if it doesn't, create it
                 if not os.path.exists(new_folder):
                     os.makedirs(new_folder)
-                # Move the file to the new destination.
+                # Move the file from the source to the new destination
                 shutil.move(src, new_destination)
 
+
 folder_to_track = "/Users/Galock/Downloads"  # This is the directory you are monitoring
-folder_destination = "/Users/Galock/Downloads"  # This is where new folders for each file type will be created
+folder_destination = "/Users/Galock/Desktop/File Sorter"  # This is where new folders for each file type will be created
 
 
 # Create an event handler object
@@ -44,7 +44,7 @@ observer.start()
 # Keep the script running and watch for changes.
 try:
     while True:
-        time.sleep(10)  # Sleep for 10 seconds before the next check
+        time.sleep(60)  # Sleep for 60 seconds before the next check
 except KeyboardInterrupt:  # If user hits Ctrl+C (or Cmd+C), then exit the loop
     observer.stop()  # Stop the observer
 
