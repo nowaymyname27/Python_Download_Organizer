@@ -19,8 +19,8 @@ class MyHandler(FileSystemEventHandler):
                 # Move the file
                 shutil.move(src, new_destination)
 
-folder_to_track = "/path/to/your/Downloads/folder"
-folder_destination = "/path/to/your/Destination/folder"
+folder_to_track = "/Users/Galock/Downloads"
+folder_destination = "/Users/Galock/Downloads/PDF"
 
 event_handler = MyHandler()
 observer = Observer()
