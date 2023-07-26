@@ -44,7 +44,7 @@ observer.start()
 # Keep the script running and watch for changes.
 try:
     while True:
-        time.sleep(60)  # Sleep for 60 seconds before the next check
+        time.sleep(15)  # Sleep for 15 seconds before the next check
 except KeyboardInterrupt:  # If user hits Ctrl+C (or Cmd+C), then exit the loop
     observer.stop()  # Stop the observer
 
